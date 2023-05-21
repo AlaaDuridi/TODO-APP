@@ -1,36 +1,25 @@
-// Task object constructor using prototypes
 function Task(description, dueDate, priority) {
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
     this.completed = false;
   }
-  
-  // TodoList object constructor
   function TodoList() {
     this.tasks = [];
-  
-    // Add a new task to the list
     this.addTask = function (description, dueDate, priority) {
       const newTask = new Task(description, dueDate, priority);
       this.tasks.push(newTask);
       console.log('Task added successfully!');
     };
-  
-    // List all tasks
     this.listAllTasks = function () {
       console.log('All Tasks:');
       this.printTasks(this.tasks);
     };
-  
-    // List completed tasks
     this.listCompletedTasks = function () {
       const completedTasks = this.tasks.filter(task => task.completed);
       console.log('Completed Tasks:');
       this.printTasks(completedTasks);
     };
-  
-    // Mark a task as completed
     this.markTaskAsDone = function (index) {
       if (index >= 0 && index < this.tasks.length) {
         this.tasks[index].completed = true;
@@ -39,8 +28,6 @@ function Task(description, dueDate, priority) {
         console.log('Invalid task index.');
       }
     };
-  
-    // Delete a task
     this.deleteTask = function (index) {
       if (index >= 0 && index < this.tasks.length) {
         this.tasks.splice(index, 1);
@@ -49,28 +36,20 @@ function Task(description, dueDate, priority) {
         console.log('Invalid task index.');
       }
     };
-  
-    // Sort tasks by due date
     this.sortTasksByDueDate = function () {
       const sortedTasks = this.tasks.slice().sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate));
       console.log('Tasks sorted by due date:');
       this.printTasks(sortedTasks);
     };
-  
-    // Sort tasks by priority
     this.sortTasksByPriority = function () {
       const sortedTasks = this.tasks.slice().sort((a, b) => a.priority - b.priority);
       console.log('Tasks sorted by priority:');
       this.printTasks(sortedTasks);
     };
-  
-    // Clear all tasks
     this.clearAllTasks = function () {
       this.tasks = [];
       console.log('All tasks cleared!');
     };
-  
-    // Print the list of tasks
     this.printTasks = function (tasks) {
       tasks.forEach((task, index) => {
         const status = task.completed ? 'Completed' : 'Incomplete';
@@ -78,17 +57,10 @@ function Task(description, dueDate, priority) {
       });
     };
   }
-  
-  // Create a new TodoList
-  const todoList = new TodoList();
-
-  // Read user input from stdin
+const todoList = new TodoList();
 const readline = require('readline');
-
-let rl = readline.createInterface(process.stdin, process.stdout);
-  
-  // Print welcome message and list of actions
-   entry = () =>{
+const rl = readline.createInterface(process.stdin, process.stdout);
+  entry = () =>{
   console.log('***************************');
   console.log('Welcome to JS TODO-APP');
   console.log('***************************');
@@ -103,11 +75,6 @@ let rl = readline.createInterface(process.stdin, process.stdout);
   console.log('8) Clear all tasks');
   console.log('9) Exit');
   console.log('***************************');
-  
-  
-  
-  
-  // Handle user input
   rl.question("What's your choice? ", function (choice) {
     switch (choice) {
       case '1': // Add a new task
@@ -119,49 +86,39 @@ let rl = readline.createInterface(process.stdin, process.stdout);
            });
           });
         });
-
-
         break;
       case '2': // List all tasks
         todoList.listAllTasks();
         entry() ; 
-
         break;
       case '3': // List completed tasks
         todoList.listCompletedTasks();
         entry() ; 
-
         break;
       case '4': // Mark task as done
         rl.question('Enter task index to mark as done: ', function (index) {
           todoList.markTaskAsDone(index - 1); // Subtract 1 to match array index
           entry()
         });
-
         break;
       case '5': // Delete a task
         rl.question('Enter task index to delete: ', function (index) {
           todoList.deleteTask(index - 1); // Subtract 1 to match array index
           entry() ; 
         });
-
         break;
       case '6': // Sort tasks by due date
         todoList.sortTasksByDueDate();
         entry() ; 
-
         break;
       case '7': // Sort tasks by priority
         todoList.sortTasksByPriority();
         entry() ; 
-
         break;
       case '8': // Clear all tasks
         todoList.clearAllTasks();
         entry() ; 
-
         break;
-
         case '9':
             console.log('Thank You!');
             rl.close() ;
@@ -171,8 +128,5 @@ let rl = readline.createInterface(process.stdin, process.stdout);
         return entry() ;
     }
   });
-
 };
-
-
 entry() ;
