@@ -119,7 +119,7 @@ const rl = readline.createInterface(process.stdin, process.stdout);
         todoList.clearAllTasks();
         entry() ; 
         break;
-        case '9':
+        case '9': // Exit App
             console.log('Thank You!');
             rl.close() ;
             break ; 
